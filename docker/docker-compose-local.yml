@@ -12,6 +12,8 @@ services:
                 max-file: "3"
         volumes:
             - "${PWD}/db-data:/var/lib/postgresql/data"
+        ports:
+            - "5432:5432"
 
     local-runner:
         image: amazon/mwaa-local:2_4
@@ -27,9 +29,10 @@ services:
                 max-size: 10m
                 max-file: "3"
         volumes:
-            - "${PWD}/dags:/usr/local/airflow/dags"
+            - "${PWD}/../dags:/usr/local/airflow/dags"
             - "${PWD}/plugins:/usr/local/airflow/plugins"
-            - "${PWD}/requirements:/usr/local/airflow/requirements"
+            - "${PWD}/../../api:/usr/local/airflow/api"
+            - "${PWD}/../requirements:/usr/local/airflow/requirements"
         ports:
             - "8080:8080"
         command: local-runner
