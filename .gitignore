@@ -5,3 +5,5 @@ dags/**/*.pyc
 /logs
 /db-data
 .DS_Store
+
+docker/docker-compose-local.override.yml
