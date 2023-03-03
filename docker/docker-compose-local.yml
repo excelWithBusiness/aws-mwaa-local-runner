@@ -33,7 +33,7 @@ services:
             - "${PWD}/../../api:/usr/local/airflow/api"
             - "${PWD}/../requirements_local.txt:/usr/local/airflow/requirements/requirements.txt"
         ports:
-            - "8080:8080"
+            - "8181:8080"
         command: local-runner
         healthcheck:
             test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
