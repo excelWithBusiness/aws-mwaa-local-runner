@@ -21,17 +21,19 @@ services:
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
+            - AIRFLOW__CORE__DAG_RUN_CONF_OVERRIDES_PARAMS=True
         logging:
             options:
                 max-size: 10m
                 max-file: "3"
         volumes:
-            - "${PWD}/dags:/usr/local/airflow/dags"
+            - "${PWD}/../dags:/usr/local/airflow/dags"
             - "${PWD}/plugins:/usr/local/airflow/plugins"
-            - "${PWD}/requirements:/usr/local/airflow/requirements"
+            - "${PWD}/../../api:/usr/local/airflow/api"
+            - "${PWD}/../requirements_local.txt:/usr/local/airflow/requirements/requirements.txt"
             - "${PWD}/startup_script:/usr/local/airflow/startup"
         ports:
-            - "8080:8080"
+            - "8181:8080"
         command: local-runner
         healthcheck:
             test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
